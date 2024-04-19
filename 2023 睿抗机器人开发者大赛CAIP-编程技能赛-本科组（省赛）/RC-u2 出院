@@ -1,0 +1,71 @@
+```
+#include <iostream>
+#include<math.h>
+/*s.substr函数
+形式为s.substr(pos, n)，
+需要两个参数，第一个是开始位置，第二个是获取子串的长度。
+函数可以从一个字符串中获取子串，返回一个string，*/
+/*
+mp.count函数
+（返回元素个数=>存不存在）
+返回的是一个容器中，某一元素出现的次数，
+但是map中的key是不允许重复出现的，
+故count函数返回值只能是1（存在）或0（不存在）。
+*/
+using namespace std;
+#include <map>
+
+int main()
+{
+    int n, m;
+    cin>>n>>m;
+    map<string ,string>mp;
+    for(int i=0;i<n;i++){
+        string a, b;
+        cin>>a>>b;
+        mp.insert({a,b});
+        //cout<<mp[a]<<endl;
+
+    }
+    string s;
+    while(m--){
+
+        
+        int res=0;//第一个字符串符合和第二个字符串也符合，res=1;否res=0
+        cin>>s;
+        int len=s.length();
+        string ans;
+        if(mp.count(s)){
+            cout<<mp[s]<<endl;
+            res++;
+        }
+        
+        else{
+            
+            for(auto it:mp){
+                if(len>=it.first.size()){
+                    //if(mp.count(s.substr(0,it.first.size())))
+                    if(it.first==s.substr(0,it.first.size())){                       
+                        if(mp.count(s.substr(it.first.size(),len))){
+                            res++;
+                            ans= mp[s.substr(0,it.first.size())]+mp[s.substr(it.first.size(),len)];
+                        }
+                    }
+                }
+            }
+        }
+        if(res==0){
+            cout<<"D"<<endl;
+        }
+        else{
+            cout<<ans<<endl;
+        }
+        
+    }
+    
+    
+    return 0;
+}
+
+
+```c
