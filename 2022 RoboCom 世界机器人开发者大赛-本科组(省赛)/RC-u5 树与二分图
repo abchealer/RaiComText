@@ -1,0 +1,34 @@
+#include <bits/stdc++.h>
+#include <vector>
+using namespace std;
+vector <int>G[2010];
+int jdd=0, odd=0;
+void dfs(int u, int fa, int cen){
+    if(cen%2)
+    jdd++;
+    else
+    odd++;
+    for(auto v:G[u]){
+        if(v!=fa)//双向图，遍历到孩子=fa为止表示没孩子了； 
+        dfs(v, u, cen+1);
+    }
+    
+    
+}
+
+int main()
+{
+    int n;
+    cin>>n;
+    //构造无向图
+    int a, b;
+    for(int i=0;i<n-1;i++){
+        cin>>a>>b;
+        G[a].push_back(b);
+        G[b].push_back(a);
+    }
+    //DFS构造二分图
+    dfs(1,-1,1);//从1开始，父节点=-1，层数=1；
+    cout<<jdd*odd-(n-1);
+    return 0;
+}
